@@ -18,7 +18,7 @@
     "generate:contracts-data": "sh ./src/scripts/contract-data-gen.sh",
     "generate:provider-types": "npm run run:tsc -- src/scripts/generate-provider-types.ts",
     "verify:root-ca": "npm run run:tsc -- src/scripts/verify-root-ca.ts",
-    "create:claim": "npm run run:tsc -- src/scripts/generate-receipt.ts",
+    "create:claim": "npm run run:tsc -- src/scripts/generate-receipt.ts --json 'example/twitter-followers.json' --attestor wss://attestor-core-production.up.railway.app/ws",
     "build-contracts": "cd avs/contracts && forge build",
     "deploy:contracts": "sh avs/utils/anvil/deploy-all-to-anvil-and-save-state.sh",
     "deploy:contracts-to-chain": "sh avs/utils/anvil/deploy-to-chain.sh",

@@ -1,0 +1,21 @@
+{
+  "name": "http",
+  "description": [
+    "Example to fetch the number of followers of a twitter user"
+  ],
+  "params": {
+    "method": "GET",
+    "url": "https://api.twitter.com/2/users/by/username/anime_kaguya?user.fields=public_metrics",
+    "responseMatches": [
+      {
+        "type": "regex",
+        "value": "followers_count\":\\s*(?<followers_count>[\\d\\.]+)"
+      }
+    ]
+  },
+  "secretParams": {
+    "headers": {
+      "Authorization": "Bearer YOUR_TWITTER_API_KEY"
+    }
+  }
+}
