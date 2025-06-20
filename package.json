@@ -34,7 +34,8 @@
     "start:chain": "bash ./avs/utils/anvil/start-anvil-chain-with-el-and-avs-deployed.sh",
     "commitlint": "commitlint --edit",
     "download:zk-files": "node node_modules/@reclaimprotocol/zk-symmetric-crypto/lib/scripts/download-files",
-    "generate:toprf-keys": "npm run run:tsc -- src/scripts/generate-toprf-keys.ts"
+    "generate:toprf-keys": "npm run run:tsc -- src/scripts/generate-toprf-keys.ts",
+    "start:api": "npm run run:tsc -- src/api-server.ts"
   },
   "files": [
     "lib/*"
@@ -71,12 +72,14 @@
     "@commitlint/config-conventional": "^17.8.1",
     "@reclaimprotocol/tls": "^0.0.2",
     "@reclaimprotocol/zk-symmetric-crypto": "^3.0.2",
+    "@types/express": "^5.0.3",
     "ajv": "^8.17.1",
     "canonicalize": "^2.0.0",
     "dotenv": "^16.4.6",
     "elastic-apm-node": "^4.8.1",
     "esprima-next": "^5.8.4",
     "ethers": "^5.7.2",
+    "express": "^5.1.0",
     "https-proxy-agent": "^7.0.5",
     "ip-cidr": "^3.0.0",
     "jsdom": "^24.1.3",
