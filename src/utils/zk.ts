@@ -476,7 +476,7 @@ export async function verifyZkPacket({
       publicInput: {
         ciphertext: ciphertextChunk,
         iv: nonce,
-        offset: chunkIndex,
+        offsetBytes: chunkIndex * chunkSizeBytes,
       },
       logger,
       ...(toprf
@@ -669,7 +669,7 @@ function getProofGenerationParamsForChunk(
     publicInput: {
       ciphertext: ciphertextChunk,
       iv,
-      offsetChunks,
+      offsetBytes: offsetChunks * chunkSize,
     },
     toprf,
   };
