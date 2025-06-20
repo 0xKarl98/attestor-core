@@ -35,7 +35,6 @@ const PRIVATE_KEY_HEX =
 export async function main<T extends ProviderName>(
   receiptParams?: ProviderReceiptGenerationParams<T>
 ) {
-  console.log("receiptParams", receiptParams);
   const paramsJson = receiptParams ?? (await getInputParameters());
   if (!(paramsJson.name in providers)) {
     throw new Error(`Unknown provider "${paramsJson.name}"`);
@@ -45,6 +44,7 @@ export async function main<T extends ProviderName>(
 
   let attestorHostPort =
     getCliArgument("attestor") || DEFAULT_ATTESTOR_HOST_PORT;
+
   let server: WebSocketServer | undefined;
   if (attestorHostPort === "local") {
     console.log("starting local attestor server...");
@@ -54,7 +54,6 @@ export async function main<T extends ProviderName>(
 
   const zkEngine = getCliArgument("zk") === "gnark" ? "gnark" : "snarkjs";
 
-  console.log("paramsJson", paramsJson);
   const receipt = await createClaimOnAttestor({
     name: paramsJson.name,
     secretParams: paramsJson.secretParams,
@@ -67,12 +66,15 @@ export async function main<T extends ProviderName>(
 
   if (receipt.error) {
     console.error("claim creation failed:", receipt.error);
-  } else {
-    const ctx = receipt.claim?.context ? JSON.parse(receipt.claim.context) : {};
-    console.log(`receipt is valid for ${paramsJson.name} provider`);
-    if (ctx.extractedParameters) {
-      console.log("extracted params:", ctx.extractedParameters);
-    }
+    throw new Error(`Claim creation failed: ${receipt.error}`);
+  }
+
+  const ctx = receipt.claim?.context ? JSON.parse(receipt.claim.context) : {};
+
+  let extractedParameters;
+  if (ctx.extractedParameters) {
+    console.log("extracted params:", ctx.extractedParameters);
+    extractedParameters = ctx.extractedParameters;
   }
 
   const decTranscript = await decryptTranscript(
@@ -88,6 +90,13 @@ export async function main<T extends ProviderName>(
   const client = getAttestorClientFromPool(attestorHostPort);
   await client.terminateConnection();
   server?.close();
+
+  return {
+    receipt,
+    extractedParameters,
+    transcript: transcriptStr,
+    provider: paramsJson.name,
+  };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
