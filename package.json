@@ -19,6 +19,8 @@
     "generate:provider-types": "npm run run:tsc -- src/scripts/generate-provider-types.ts",
     "verify:root-ca": "npm run run:tsc -- src/scripts/verify-root-ca.ts",
     "create:claim": "npm run run:tsc -- src/scripts/generate-receipt.ts --json 'example/twitter-followers.json' --attestor wss://attestor-core-production.up.railway.app/ws",
+    "create:twitter-claim:local": "npm run run:tsc -- src/scripts/generate-receipt.ts --json 'example/twitter-followers.json' --attestor ws://localhost:8001/ws",
+    "create:coin-gecko-claim:local": "npm run run:tsc -- src/scripts/generate-receipt.ts --json 'example/coin-gecko.json' --attestor ws://localhost:8001/ws",
     "build-contracts": "cd avs/contracts && forge build",
     "deploy:contracts": "sh avs/utils/anvil/deploy-all-to-anvil-and-save-state.sh",
     "deploy:contracts-to-chain": "sh avs/utils/anvil/deploy-to-chain.sh",
