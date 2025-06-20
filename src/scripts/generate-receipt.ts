@@ -25,7 +25,8 @@ type ProviderReceiptGenerationParams<P extends ProviderName> = {
 };
 
 // tmp change till we move OPRF attestor to prod
-const DEFAULT_ATTESTOR_HOST_PORT = "wss://attestor.reclaimprotocol.org:447/ws";
+const DEFAULT_ATTESTOR_HOST_PORT =
+  "wss://attestor-core-production.up.railway.app/ws";
 const PRIVATE_KEY_HEX =
   getEnvVariable("PRIVATE_KEY_HEX") ||
   // demo private key
