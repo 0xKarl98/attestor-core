@@ -6,6 +6,16 @@ import { logger } from "./utils";
 const app = express();
 const PORT = process.env.API_PORT || 3000;
 
+const validateClientParamValues = (clientParamValues: any) => {
+  if (!clientParamValues.issuedDate) {
+    throw new Error("issuedDate is required");
+  }
+
+  if (!clientParamValues.issueNumber) {
+    throw new Error("issueNumber is required");
+  }
+};
+
 app.use(express.json());
 
 // curl -X POST localhost:3000/api/generate-receipt
@@ -14,7 +24,21 @@ app.post("/api/generate-receipt", async (req: any, res: any) => {
     const BASE_ATTESTOR_URL =
       "wss://attestor-core-production.up.railway.app/ws";
     const attestor = req.body?.attestor || BASE_ATTESTOR_URL;
-    console.log("Request received:", { attestor });
+    const body = req.body || {};
+    validateClientParamValues(body);
+    // body should be like this:
+    // {
+    //   "issuedDate": "2025-06-18",
+    //   "issueNumber": "4116-ALQE-QRHYSDDU"
+    // }
+    // validate this
+
+    const paramsValues = {
+      URL_PARAMS_1: body.issuedDate,
+      URL_PARAMS_GRD: body.issueNumber,
+    };
+
+    console.log("body", body);
 
     // Read tossbank.json file
     let fileContents = await readFile("example/tossbank.json", "utf8");
@@ -29,7 +53,11 @@ app.post("/api/generate-receipt", async (req: any, res: any) => {
     }
 
     const receiptParams = JSON.parse(fileContents);
-    console.log("Receipt params prepared:", receiptParams.name);
+
+    console.log("receiptParams before", receiptParams);
+
+    receiptParams.params.paramValues = paramsValues;
+    console.log("receiptParams after", receiptParams);
 
     // Set attestor URL
     process.env.ATTESTOR_URL = attestor;
