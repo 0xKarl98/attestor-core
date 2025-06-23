@@ -3,12 +3,17 @@
   "version": "4.0.0",
   "description": "",
   "main": "lib/index",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && tsc-alias",
     "build:browser": "sh ./src/scripts/build-browser.sh",
     "run:tsc": "SWC_NODE_IGNORE_DYNAMIC=true node -r @swc-node/register",
     "start:tsc": "npm run run:tsc -- src/scripts/start-server",
-    "start": "node lib/scripts/start-server",
+    "start": "node lib/api-server.js",
+    "start:main": "node lib/scripts/start-server",
     "prepare": "sh ./src/scripts/prepare.sh",
     "test": "NODE_ENV=test TZ=utc jest --verbose --forceExit --detectOpenHandles",
     "test:avs": "NODE_ENV=test TZ=utc jest --verbose --forceExit --detectOpenHandles --test-match **/src/avs/tests/test.*.ts",
