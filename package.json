@@ -75,6 +75,7 @@
     "@bufbuild/protobuf": "^2.2.2",
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
+    "@ethersproject/abi": "^5.7.2",
     "@ethersproject/providers": "^5.7.2",
     "@reclaimprotocol/tls": "^0.0.2",
     "@reclaimprotocol/zk-symmetric-crypto": "^3.0.2",

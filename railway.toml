@@ -1,8 +1,9 @@
 [build]
 builder = "nixpacks"
+buildCommand = "echo $(node -v) && pnpm install && pnpm run build"
 
 [deploy]
 startCommand = "pnpm start"
-healthcheckPath = "/health"
-healthcheckTimeout = 300
-restartPolicyType = "on_failure" 
+
+[variables]
+NODE_VERSION = "23" 
