@@ -2,6 +2,7 @@ import express from "express";
 import { readFile } from "fs/promises";
 import { main as generateReceiptMain } from "./scripts/generate-receipt";
 import { logger } from "./utils";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.API_PORT || 3000;
@@ -16,6 +17,7 @@ const validateClientParamValues = (clientParamValues: any) => {
   }
 };
 
+app.use(cors());
 app.use(express.json());
 
 // curl -X POST localhost:3000/api/generate-receipt
