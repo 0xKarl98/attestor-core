@@ -58,7 +58,7 @@ app.post("/api/generate-receipt", async (req: any, res: any) => {
 
     console.log("receiptParams before", receiptParams);
 
-    receiptParams.params.paramValues = paramsValues;
+    receiptParams.secretParams.paramValues = paramsValues;
     console.log("receiptParams after", receiptParams);
 
     // Set attestor URL
