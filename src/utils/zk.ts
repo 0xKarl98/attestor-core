@@ -9,6 +9,7 @@ import {
 	CONFIG as ZK_CONFIG,
 	EncryptionAlgorithm,
 	generateProof,
+	makeBarretenbergZKOperator,
 	makeGnarkOPRFOperator,
 	makeGnarkZkOperator,
 	makeLocalFileFetch,
@@ -535,6 +536,7 @@ const operatorMakers: {
 } = {
 	snarkjs: makeSnarkJsZKOperator,
 	gnark: makeGnarkZkOperator,
+	barretenberg: makeBarretenbergZKOperator,
 }
 
 const OPRF_OPERATOR_MAKERS: { [z in ZKEngine]?: MakeOPRFOperator<{}> } = {
