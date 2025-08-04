@@ -25,7 +25,7 @@ const ZK_CIPHER_SUITES: CipherSuite[] = [
 
 const ZK_ENGINES: ZKEngine[] = [
 	// 'gnark',
-	'snarkjs',
+	// 'snarkjs',
 	'barretenberg',
 ]
 
