@@ -570,8 +570,11 @@ export function makeDefaultZkOperator(
 		if(!maker) {
 			throw new Error(`No ZK operator maker for ${zkEngine}`)
 		}
-
-		zkOperators[algorithm] = maker({ algorithm, fetcher })
+		if(zkEngine === 'barretenberg') {
+			zkOperators[algorithm] = maker({ algorithm, fetcher, options: { threads: 8, maxProofConcurrency: 2 } })
+		} else {
+			zkOperators[algorithm] = maker({ algorithm, fetcher })
+		}
 	}
 
 	return zkOperators[algorithm]
