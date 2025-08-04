@@ -23,7 +23,8 @@ import {
 	verifyProof,
 	ZKEngine,
 	ZKOperator,
-} from '@reclaimprotocol/zk-symmetric-crypto'
+// } from '@reclaimprotocol/zk-symmetric-crypto'
+} from 'zk-symmetric-crypto-test'
 import {
 	DEFAULT_REMOTE_FILE_FETCH_BASE_URL,
 	DEFAULT_ZK_CONCURRENCY,
